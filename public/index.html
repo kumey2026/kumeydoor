@@ -29,9 +29,13 @@ body {
 }
 
 .logo {
-  width: 120px;
-  margin-bottom: 15px;
+  width: 60%;
+  max-width: 220px;
+  height: auto;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));
 }
+
 
 h1 {
   font-size: 22px;
@@ -63,6 +67,10 @@ button:active {
 }
 
 @media (max-width: 480px) {
+  .logo {
+    width: 75%;
+    max-width: 260px;
+  }
   button {
     width: 170px;
     height: 170px;
