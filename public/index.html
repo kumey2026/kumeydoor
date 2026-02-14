@@ -1,35 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KumeyDoor</title>
+
 <style>
-body {
-  text-align: center;
-  margin-top: 100px;
-  font-family: Arial;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
 }
+
+body {
+  background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 22px;
+  margin-bottom: 40px;
+  color: #1e293b;
+}
+
 button {
-  background: linear-gradient(45deg, #2e7d32, #43a047);
-  color: white;
-  font-size: 24px;
-  padding: 20px 50px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
   border: none;
-  border-radius: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  background: #22c55e;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.status {
+  margin-top: 30px;
+  font-size: 16px;
+  color: #334155;
+}
+
+@media (max-width: 480px) {
+  button {
+    width: 170px;
+    height: 170px;
+  }
 }
 </style>
 </head>
+
 <body>
 
-<h1>🚪 KumeyDoor</h1>
+<div class="container">
 
-<button onclick="abrirPuerta()">Abrir Puerta</button>
+  <!-- LOGO -->
+  <img src="logo.png" class="logo" alt="Logo">
+
+  <h1>Control de Puerta</h1>
+
+  <button onclick="abrirPuerta()">ABRIR</button>
+
+  <div class="status" id="status">
+    Esperando acción...
+  </div>
+
+</div>
 
 <script>
-function abrirPuerta(){
-  fetch("/abrir?token=123ABC")
-  .then(res => res.text())
-  .then(data => alert(data));
+function abrirPuerta() {
+
+  const status = document.getElementById("status");
+
+  status.innerText = "Enviando orden...";
+  
+  fetch('/abrir?token=123ABC')
+    .then(res => res.text())
+    .then(data => {
+
+      status.innerText = "Puerta abierta ✔";
+
+      setTimeout(() => {
+        status.innerText = "Esperando acción...";
+      }, 3000);
+
+    })
+    .catch(() => {
+      status.innerText = "Error de conexión ❌";
+    });
 }
 </script>
 
