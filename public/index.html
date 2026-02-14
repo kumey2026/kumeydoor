@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>KumeyDoor</title>
+<style>
+body {
+  text-align: center;
+  margin-top: 100px;
+  font-family: Arial;
+}
+button {
+  background: linear-gradient(45deg, #2e7d32, #43a047);
+  color: white;
+  font-size: 24px;
+  padding: 20px 50px;
+  border: none;
+  border-radius: 15px;
+}
+</style>
+</head>
+<body>
+
+<h1>🚪 KumeyDoor</h1>
+
+<button onclick="abrirPuerta()">Abrir Puerta</button>
+
+<script>
+function abrirPuerta(){
+  fetch("/abrir?token=123ABC")
+  .then(res => res.text())
+  .then(data => alert(data));
+}
+</script>
+
+</body>
+</html>
